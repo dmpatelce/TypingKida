@@ -1,5 +1,5 @@
-var oFileIn;
 var fileJson;
+var currentTime;
 var startTime = new Date();
 var typed = [];
 var remaining = [];
@@ -30,19 +30,19 @@ $(function () {
 	$("#start").on("click", function () {
 		toStart();
 	});
-	$("#to_text").on('keypress', function (event) {
+	$("#to_text").on('keypress', function (ev) {
 		if (!wrongFlag) {
-			toType(event, true);
+			toType(ev, true);
 		} else {
 			return false;
 		}
 	});
-	$("#to_text").on('keydown', function (e) {
-		if (event.keyCode == 8 && $(e.target).is("input, textarea")) {
+	$("#to_text").on('keydown', function (ev) {
+		if (ev.keyCode == 8 && $(ev.target).is("input, textarea")) {
 			if (!wrongFlag) {
-				e.preventDefault();
+				ev.preventDefault();
 			} else {
-				toType(event, false);
+				toType(ev, false);
 			}
 		}
 	});
@@ -66,8 +66,8 @@ async function toStart() {
 
 	var random = Math.floor(Math.random() * 10);
 	// var random = 11;
-	var fromString = _.filter(fileJson, function (line) {
-		if (parseInt(line.no) == random) {
+	var fromString = fileJson.filter(function (line) {
+		if (parseInt(line.no) === random) {
 			return line;
 		}
 	});
@@ -84,7 +84,7 @@ function startTyping(paragraph) {
 	characters = paragraph.split("");
 	var newarr = []
 	startTime = new Date();
-	characters = _.each(characters, ch => {
+	characters = characters.forEach(function (ch) {
 		if (ch == ' ') {
 			ch = '&nbsp';
 		}
@@ -209,7 +209,7 @@ function resetAll() {
 
 function timer() {
 	var prom = new Promise(resolve => {
-		new ProgressButton($("button")[0], {
+		new window.ProgressButton($("button")[0], {
 			callback: function (instance) {
 				$(".result_div").hide();
 				$(".glitter-star").remove();
