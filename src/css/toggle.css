@@ -23,9 +23,7 @@
   display: block;
   width: 200%;
   margin-left: -100%;
-  -moz-transition: margin 0.3s ease-in 0s;
   -webkit-transition: margin 0.3s ease-in 0s;
-  -o-transition: margin 0.3s ease-in 0s;
   transition: margin 0.3s ease-in 0s;
 }
 
